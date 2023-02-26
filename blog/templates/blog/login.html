@@ -1,0 +1,41 @@
+{% extends "blog/root_layout.html" %}
+{% block title %}Login{% endblock title %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-md-6 col-sm-8 mx-auto">
+                <h1 class="display-1 mb-5 text-center">Prihlasenie</h1>
+                <div class="text-center text-danger mb-3">
+                    {% if form.errors %}
+                        {% for key,value in form.errors.items %}
+                            {{ value|striptags }}
+                        {% endfor %}
+                    {% endif %}
+
+                </div>
+                <form  method="POST" action="{% url 'blog-login' %}"> {% csrf_token %}
+                    <div class="form-outline mt-4">
+                        {{ form.login }}
+                        <span id="login-login-error" class="lr"></span>
+                    </div>
+                    <div class="form-outline mt-4">
+                        {{ form.password }}
+                        <span id="login-password-error" class="lr"></span>
+                    </div>
+                    <div class="row my-4 ">
+                        <div class="col ">
+                            <a class="link " href="#">Zabudnute Heslo?</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button onclick="return validateLoginSubmit()" type="submit" name="submit" class="btn btn-primary mb-4 me-6 sign-in">Prihlasiť</button>
+                        <span id="login-submit-error" class="lr"></span>
+                    </div>
+                    <div class="text-center text-nowrap">
+                        <p>Nie si clenom? &emsp;<a class="link" href="{% url 'blog-register' %}">Registracia</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

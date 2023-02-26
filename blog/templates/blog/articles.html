@@ -1,0 +1,54 @@
+{% extends "blog/root_layout.html" %}
+{% block title %}Articles{% endblock title %}
+{% block content %}
+    <div class="container">
+
+
+        {% if user.is_authenticated %}
+            <div class="row novinka text-center ">
+                <a id="insert_article" href="{% url 'blog-article-form' %}" class="novinkyNadpisy h2">Vytvor novy
+                    clanok </a>
+            </div>
+        {% endif %}
+
+
+        {% for article in articles %}
+            <div class="row novinka">
+                <div class="col-sm-12 col-lg-6">
+                    <img src="{{ article.img }}  " class="img-fluid " alt="Obrazok {{ article.title }}">
+                </div>
+                <div class="col ">
+                    <a href="#" class="novinkyNadpisy"><h1 class="display-6">{{ article.title }}</h1></a>
+                    <p>{{ article.text }}</p>
+                </div>
+
+                {% if user.is_authenticated %}
+                    <div class="row m-0 p-0">
+                    <div class="col-xl-12  justify-content-between d-flex mt-2">
+                    <div>
+                        <a href="{% url 'blog-article-edit' article.id %}"
+                           class="btn btn-danger {{ article.id }}-edit" id="{{ article.id }}-edit">Upravit</a> {# TODO: href #}
+                    </div>
+
+                    <div>
+                        <a href=" {% url 'blog-article-delete' article.id %} "
+                           class="btn btn-light {{ article.id }}-del" id="{{ article.id }}-delete">Zmazat</a>
+                    </div>
+
+
+
+                </div>
+                </div>
+                 {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
+
+
+
+
+
+
+
+

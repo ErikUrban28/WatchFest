@@ -1,0 +1,48 @@
+{% extends "blog/root_layout.html" %}
+{% block title %}Register{% endblock title %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-md-6 col-sm-8 mx-auto">
+                <h1 class="display-1 mb-3 text-center">Registracia</h1>
+                <div class="text-center text-danger mb-3">
+                    {% if form.errors %}
+                        {% for key,value in form.errors.items %}
+                            {{ value|striptags }}
+                        {% endfor %}
+                    {% endif %}
+
+                </div>
+                <form method="post" action="{% url 'blog-register' %}"> {% csrf_token %}
+                    <div class="form-outline mt-4">
+                        {{ form.login }}
+                        <span id="register-login-error" class="lr"></span>
+                    </div>
+                    <div class="form-outline mt-4">
+                        {{ form.email }}
+                        <span id="register-email-error" class="lr"></span>
+                    </div>
+                    <div class="form-outline mt-4">
+                        {{ form.password1 }}
+                        <span id="register-password1-error" class="lr"></span>
+                    </div>
+                    <div class="form-outline mt-4">
+                        {{ form.password2 }}
+                        <span id="register-password2-error" class="lr"></span>
+                    </div>
+                    <div class="row my-4">
+                        <div class="col">
+                            <a class="link" href="{% url 'blog-login' %}">Uz mas ucet?</a>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <button onclick="return validateRegisterSubmit()" type="submit" name="submit"
+                                class="btn btn-primary btn-block reg">Registrovat
+                        </button>
+                        <span id="register-submit-error" class="lr"></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

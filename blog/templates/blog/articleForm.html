@@ -1,0 +1,29 @@
+{% extends "blog/root_layout.html" %}
+{% block title %}ArticlesForm{% endblock title %}
+{%  block content %}
+<div class="container">
+
+<form action="#" method="post" enctype="multipart/form-data"> {%  csrf_token %}
+    {{ form.errors }}
+    {{ form.non_field_errors }}
+    {% if article %}
+
+    <input type="hidden" name="id" value="{{ article.id }}">
+    {% endif %}
+    <label>
+    <input type="text" name="title" placeholder="Nazov" value="{{ article.title }}" required autofocus minlength="2" maxlength="50">
+    </label>
+    <br><br>
+    <label>
+        <textarea rows="5" cols="60" name="text" placeholder="Zadaj text" required autofocus minlength="3" maxlength="1000">
+            {{ article.text }}
+        </textarea>
+    </label>
+    <br><br>
+    <label>Vyber obrazok na ulozenie:
+    <input type="file" name="img">
+    <input type="submit" value="Odoslat" name="submit">
+    </label>
+</form>
+</div>
+{% endblock content %}

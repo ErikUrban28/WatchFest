@@ -1,0 +1,27 @@
+{% extends "blog/root_layout.html" %}
+{% block content %}
+    <div class="container">
+
+        {% for element in users %}
+            <div class="row novinka">
+                <div class="col ">
+                    <h5>Login : {{ element.login}}</h5>
+                    <h5>Email : {{ element.email }}</h5>
+                </div>
+                {% if user.is_authenticated %}
+                    <div class="row m-0 p-0">
+                        <div class="col-xl-12  justify-content-between d-flex mt-2">
+                            <div>
+                                <a href="#" class="btn btn-danger " id="{{ element.id }}-edit">Upravit</a> {# TODO: href #}
+                            </div>
+
+                            <div>
+                                <a href="#" class="btn btn-light " id="{{ element.id }}-delete">Zmazat</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
